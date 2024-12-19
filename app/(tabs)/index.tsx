@@ -1,9 +1,7 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
-import React, { useState } from 'react';
 import { Image } from 'expo-image';
+import React, { useState } from 'react';
 import Button from '@/components/Button';
-
 
 export default function Index() {
   const [userData, setUserData] = useState({ labelChoice: '' });
@@ -14,32 +12,38 @@ export default function Index() {
 
   const Paper = {
     G: require('@/assets/images/RUKY/PaperG.png'),
-    P: require('@/assets/images/RUKY/PaperP.png'), 
-    R: require('@/assets/images/RUKY/PaperR.png'), 
-    Y: require('@/assets/images/RUKY/PaperY.png'), 
+    P: require('@/assets/images/RUKY/PaperP.png'),
+    R: require('@/assets/images/RUKY/PaperR.png'),
+    Y: require('@/assets/images/RUKY/PaperY.png'),
   };
+
   const Rock = {
     G: require('@/assets/images/RUKY/RockG.png'),
-    P: require('@/assets/images/RUKY/RockP.png'), 
-    R: require('@/assets/images/RUKY/RockR.png'), 
-    Y: require('@/assets/images/RUKY/RockY.png'), 
+    P: require('@/assets/images/RUKY/RockP.png'),
+    R: require('@/assets/images/RUKY/RockR.png'),
+    Y: require('@/assets/images/RUKY/RockY.png'),
   };
+
   const Scissors = {
     G: require('@/assets/images/RUKY/ScissorsG.png'),
-    P: require('@/assets/images/RUKY/ScissorsP.png'), 
-    R: require('@/assets/images/RUKY/ScissorsR.png'), 
-    Y: require('@/assets/images/RUKY/ScissorsY.png'), 
+    P: require('@/assets/images/RUKY/ScissorsP.png'),
+    R: require('@/assets/images/RUKY/ScissorsR.png'),
+    Y: require('@/assets/images/RUKY/ScissorsY.png'),
   };
-let Choice = Paper
+
+  let Choice = Paper; 
+
   return (
     <View style={styles.container}>
-      <Text>Selected label: {userData.labelChoice}</Text> {/* Accessing userData here */}
+      <Text style={styles.labelText}>Selected label: {userData.labelChoice}</Text>
+      
       <Image source={Choice.G} style={styles.image} />
-      <Image source={Paper.G} style={styles.image}/>
+      <Image source={Paper.G} style={styles.image} />
+      
       <View style={styles.footerContainer}>
-        <Button  label="Rock" onLabelChoice={handleLabelChoice}/>
-        <Button  label="Paper" onLabelChoice={handleLabelChoice}/>
-        <Button  label="Scissors" onLabelChoice={handleLabelChoice}/>
+        <Button label="Rock" onLabelChoice={handleLabelChoice} />
+        <Button label="Paper" onLabelChoice={handleLabelChoice} />
+        <Button label="Scissors" onLabelChoice={handleLabelChoice} />
       </View>
     </View>
   );
@@ -49,8 +53,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2e4736',
     alignItems: 'center',
-    justifyContent:"space-between",
-    height:'100%' ,
+    justifyContent: "space-between",
+    height: '100%',
   },
 
   footerContainer: {
@@ -60,4 +64,10 @@ const styles = StyleSheet.create({
     width: '50%',
     height: '25%',
   },
+
+  labelText: {
+    color: 'white', 
+    fontSize: 18,
+    marginBottom: 20, 
+  }
 });
