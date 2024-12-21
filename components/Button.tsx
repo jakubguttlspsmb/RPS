@@ -1,46 +1,47 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import React, { useState } from 'react';
+import React from 'react';
+
+type LabelChoice = 'Rock' | 'Paper' | 'Scissors';
 
 type Props = {
-  label: string;
-  onLabelChoice: (label: string) => void;
+  label: LabelChoice;
+  onLabelChoice: (label: LabelChoice) => void;
+  random: number; 
 };
 
-export default function Button({ label, onLabelChoice  }: Props) {
+export default function Button({ label, onLabelChoice, random }: Props) {
   const game = () => {
-  let random = Math.floor(Math.random() * 3) + 1;
-   let choice = 0; 
-   if (label == "Rock"){
-    choice = 1; 
-   };
-   if (label == "Paper"){
-    choice = 2;
-   };
-   if (label == "Scissors"){
-    choice = 3; 
-   };
+    let userChoiceIndex = 0;
 
-   console.log(`User choice: ${label}`);
-   console.log(`Computer choice: ${["Rock", "Paper", "Scissors"][random - 1]}`);
+    if (label === "Rock") {
+      userChoiceIndex = 0;
+    } else if (label === "Paper") {
+      userChoiceIndex = 1;
+    } else if (label === "Scissors") {
+      userChoiceIndex = 2;
+    }
 
-   if (choice === random) {
-    console.log("It's a tie!");
-  }
-  else if (
-    (choice === 1 && random === 2) || 
-    (choice === 2 && random === 3) || 
-    (choice === 3 && random === 1)    
-  ) {
-    console.log('Computer wins!');
-  } else {
-    console.log('You win!');
-  }
-   };
+    const computerChoice = ["Rock", "Paper", "Scissors"][random];
 
-   const handleGamePress = () => {
-    onLabelChoice(label); // Update parent state with the selected label
-    game();
+    console.log(`User choice: ${label}`);
+    console.log(`Computer choice: ${computerChoice}`);
+
+    if (userChoiceIndex === random) {
+      console.log("It's a tie!");
+    } else if (
+      (userChoiceIndex === 0 && random === 1) || 
+      (userChoiceIndex === 1 && random === 2) || 
+      (userChoiceIndex === 2 && random === 0)
+    ) {
+      console.log('Computer wins!');
+    } else {
+      console.log('You win!');
+    }
+  };
+
+  const handleGamePress = () => {
+    onLabelChoice(label); 
+    game(); 
   };
 
   return (
@@ -67,13 +68,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    borderColor:"black",
-    borderWidth:1,
-    backgroundColor:"#a85b1b",
+    borderColor: "black",
+    borderWidth: 1,
+    backgroundColor: "#a85b1b",
   },
   buttonLabel: {
     color: 'black',
     fontSize: 16,
   },
 });
-
